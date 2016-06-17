@@ -59,6 +59,55 @@ def call():
     return service()
 
 
+def wh_pic_redirect():
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    args = request.args
+
+    if args:
+        wdpaid = args[0]
+        # redirect(URL('static','images/test.jpg'))
+        return response.stream(URL('static','images/test.jpg'))
+    else:
+        return None
+
+
+def wh_pic():
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    args = request.args
+
+    if args:
+        wdpaid = args[0]
+
+        import os
+        # the URL function won't work
+        path = os.path.join(request.folder, 'static', 'images', 'test.jpg')
+
+        # if not found
+        if not os.path.exists(path):
+            path = ''
+
+        return response.stream(path)
+    else:
+        return None
+
+def test_stream():
+    import os
+    path = os.path.join(request.folder, 'static', 'images', 'test.jpg')
+    # return path
+    return response.stream(path) 
+
+        # return response.stream()
+
+def wh_pic_url():
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    args = request.args
+
+    if args:
+        wdpaid = args[0]
+        return URL('static','images/test.jpg')
+    else:
+        return None
+
 def wh_attr():
     response.headers['Access-Control-Allow-Origin'] = '*'
     import json
@@ -70,6 +119,13 @@ def wh_attr():
     else:
         row = {}
 
-    return json.dumps(row)#     wdpaid = request.args[0]
-#     en_name = db(db.wh.wdpaid==wdpaid).select().first()
-#     return dict(en_name = en_name)
+    return json.dumps(row)
+
+def wh_all():
+    from utility import get_all_wh
+
+    wh = get_all_wh().as_list()
+
+    import json
+
+    return json.dumps(wh)
