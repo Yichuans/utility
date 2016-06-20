@@ -80,7 +80,7 @@ def wh_pic():
 
         import os
         # the URL function won't work
-        path = os.path.join(request.folder, 'static', 'images', 'test.jpg')
+        path = os.path.join(request.folder, 'static', 'images/whs', wdpaid + '.jpg')
 
         # if not found
         if not os.path.exists(path):
@@ -90,11 +90,11 @@ def wh_pic():
     else:
         return None
 
-def test_stream():
-    import os
-    path = os.path.join(request.folder, 'static', 'images', 'test.jpg')
-    # return path
-    return response.stream(path) 
+# def test_stream():
+#     import os
+#     path = os.path.join(request.folder, 'static', 'images', 'test.jpg')
+#     # return path
+#     return response.stream(path) 
 
         # return response.stream()
 
